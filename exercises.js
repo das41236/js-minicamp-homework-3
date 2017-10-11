@@ -1,20 +1,22 @@
 // Do not change any of the function names
 
 function makeCat(name, age) {
-  var cat = {
-    u: name,
-    i: age,
+  var makeCat = {
+    'name': name,
+    'age': age,
     meow: function() {
       return 'Meow!';
     }
 
   };
-  return cat;
+  return makeCat;
+ 
+}
   // create a new object with a name property with the value set to the name argument
   // add an age property to the object with the value set to the age argument
   // add a method called meow that returns the string 'Meow!'
   // return the object
-}
+
 
 function addProperty(object, property) {
     object[property] = null;
@@ -58,7 +60,7 @@ function newUser(name, email, password) {
 }
 
 function hasEmail(user) {
-  if (user['email'] !== undefined) {
+  if (user.email) {
     return true;
   } else {
     return false;
@@ -69,7 +71,11 @@ function hasEmail(user) {
 }
 
 function hasProperty(object, property) {
-  object.hasOwnProperty(property);
+  if (object[property]) {
+    return true;
+  } else {
+    return false;
+  }
   
   // return true if the object has the value of the property argument
   // property is a string
@@ -77,8 +83,10 @@ function hasProperty(object, property) {
 }
 
 function verifyPassword(user, password) {
+  var pass = false;
     if (password === user['password']) {
-    return true;
+      pass = true;
+    return pass;
   } else {
     return false;
   }
@@ -103,10 +111,13 @@ function addFriend(user, newFriend) {
 }
 
 function setUsersToPremium(users) {
-  for (var x=0; x < users.length; x++) {
-    users.isPremium[x] = true;
+  
+  for (var x in users) {
+    users[x].isPremium = true;
+    
   }
   return users;
+  
   // users is an array of user objects.
   // each user object has the property 'isPremium'
   // set each user's isPremium property to true
@@ -114,20 +125,28 @@ function setUsersToPremium(users) {
 }
 
 function sumUserPostLikes(user) {
- 
+  var n = 0;
+  for (var i in user.posts) {
+    n = n + user.posts[i].likes;
+    
+   }
+  return n;
+}
+
   // user has an array property called 'posts'
   // posts is an array of post objects
   // each post object has an integer property called 'likes'
   // sum together the likes from all the post objects
   // return the sum
-}
+
 
 function addCalculateDiscountPriceMethod(storeItem) {
- storeItem.calculateDiscountPrice = function() {
-  storeItem.price - (storeItem.price * storeItem.discountPercentage);
-  };
-  return storeItem;
-
+  storeItem.calculateDiscountPrice = function() {
+    storeItem.price = storeItem.price - (storeItem.price * storeItem.discountPercentage);
+    };
+    return storeItem;
+    storeItem.calculateDiscountPrice();
+  }
   // add a method to the storeItem object called 'calculateDiscountPrice'
   // this method should multiply the storeItem's 'price' and 'discountPercentage' to get the discount
   // the method then subtracts the discount from the price and returns the discounted price
@@ -135,7 +154,7 @@ function addCalculateDiscountPriceMethod(storeItem) {
   // price -> 20
   // discountPercentage -> .2
   // discountPrice = 20 - (20 * .2)
-}
+
 
 // Do not modify code below this line.
 // --------------------------------
