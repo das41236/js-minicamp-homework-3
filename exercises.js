@@ -141,11 +141,12 @@ function sumUserPostLikes(user) {
 
 
 function addCalculateDiscountPriceMethod(storeItem) {
-  storeItem.calculateDiscountPrice = function() {
-    storeItem.price = storeItem.price - (storeItem.price * storeItem.discountPercentage);
+  storeItem.calculateDiscountPrice = function(price, discountPercentage) {
+    var discount = this.price * this.discountPercentage;
+    return this.price - discount;
     };
     return storeItem;
-    storeItem.calculateDiscountPrice();
+    
   }
   // add a method to the storeItem object called 'calculateDiscountPrice'
   // this method should multiply the storeItem's 'price' and 'discountPercentage' to get the discount
